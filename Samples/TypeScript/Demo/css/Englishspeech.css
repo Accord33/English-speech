@@ -1,0 +1,215 @@
+@charset "utf-8";
+
+body {
+  height: 100vh;
+}
+
+/*カラム構成*/
+.wrapper {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  margin: 30px auto;
+}
+
+.main,
+.side {
+  padding: 1px;
+}
+
+.main {
+  /*backgroundは調整用なので，完成時には削除*/
+  background: pink;
+  width: 45%;
+  height: 100%;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.side {
+  /*backgroundは調整用なので，完成時には削除*/
+  background: skyblue;
+  width: 45%;
+  height: 100%;
+}
+
+/*Live2D表示エリア*/
+.live2d {
+  margin-left: 10%;
+  width: 80%;
+  height: 80%;
+  border: 2px solid #333333;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/*録音ボタン*/
+.recIcon{
+  width: 10%;
+  margin-left: 80%;
+}
+
+/*タブ切り替え*/
+.container {
+  width: 100%;
+  height: 70%;
+  margin-bottom: 5%;
+}
+
+.tabcontent {
+  width: 100%;
+  padding: 40px;
+  height: 80%;
+}
+
+.tab {
+  padding: 20px;
+  letter-spacing: 2px;
+  border-radius: 10px 10px 0 0;
+  border: 2px solid gold;
+  border-bottom: 0px;
+  display: inline-block;
+  color: gold;
+  cursor: pointer;
+}
+
+.current-tab {
+  background: gold;
+  color: #333;
+}
+
+#tab-content {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+}
+
+.tabcontent {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: #fff;
+  width: 100%;
+  height: 50%;
+  border: 2px solid gold;
+  border-top: 0px;
+  transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+}
+
+.tabcontent.tab-active {
+  color: #333;
+  border-top: 0px;
+  display: block;
+  transform: translateY(0%);
+  -moz-transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+}
+
+/*テキストボックスの設定*/
+.speechScript {
+  height: 100%;
+  width: 90%;
+  column-span: 40;
+  overflow-y: scroll;
+}
+
+.sendMessage {
+  background: rgb(255, 255, 255);
+  margin-left: 10%;
+  margin-top: 2%;
+  width: 80%;
+  height: 80%;
+  border-radius: 10px 10px 10px 10px;
+
+}
+
+/*footerでクレジット表示*/
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+}
+
+.icon_footer {
+  position: absolute;
+  bottom: 0%;
+  right: 5%;
+  width: 20%;
+
+}
+
+/*Level Stteings CSS*/
+.level {
+  max-width: 100%;
+  margin-bottom: 5px;
+  display: block;
+  margin: 0 0 4px 0;
+  padding: 15px;
+  line-height: 1;
+  color: #fff;
+  background: green;
+  cursor: pointer;
+  border-radius: 10px 10px 10px 10px;
+  margin-bottom: 5%;
+}
+
+
+
+.levelText p {
+  margin-left: 5%;
+}
+
+/*レベル選択*/
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.radio-inline__input {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  margin-left: 5%;
+}
+
+.radio-inline__label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-right: 18px;
+  border-radius: 3px;
+  transition: all .2s;
+  margin-left: 5%;
+}
+
+.radio-inline__input:checked+.radio-inline__label {
+  background: #90f340;
+  color: #000000;
+  text-shadow: 0 0 1px rgba(0, 0, 0, .7);
+}
+
+.radio-inline__input:focus+.radio-inline__label {
+  outline-color: #4D90FE;
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+}
+
+.sendLevel {
+  border-radius: 100vh;
+  font-size: medium;
+  font-weight: 500;
+  margin-left: 90%;
+}
+
+.sendLevel:hover {
+  color: #ffffff;
+  background: #0800fc;
+  margin-left: 90%;
+}
