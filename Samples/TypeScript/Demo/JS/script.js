@@ -7,41 +7,69 @@ img[0].src = "imageFile/REC/0.png";
 img[1] = new Image();
 img[1].src = "imageFile/REC/1.png";
 
+SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+const recognition = new SpeechRecognition();
+const xhr = new XMLHttpRequest();
+
 var cnt=0;
 function changeIMG(){
   
   //画像番号を進める
   if (cnt == 1)
-  { cnt=0; }
+  { cnt=0;}
   else
-  { cnt++; }
+  { cnt++; 
+    recognition.onresult = (event) => {
+      alert(event.results[0][0].transcript);
+      cnt=0;
+      document.getElementById("REC").src=img[cnt].src;
+      postData(event.results[0][0].transcript);
+    }
+  
+    recognition.start();
+  }
   
   //画像を切り替える
   document.getElementById("REC").src=img[cnt].src;
 }
 
-
-
-//タブの切り替え
-window.onload = function () {
-  var tabs = document.getElementById('tab-container').children;
-  var tabcontents = document.getElementById('tab-content').children;
-
-  var myFunction = function () {
-    var tabchange = this.tabindex;
-    for (var int = 0; int < tabcontents.length; int++) {
-      tabcontents[int].className = ' tabcontent';
-      tabs[int].className = ' tab';
-    }
-    tabcontents[tabchange].classList.add('tab-active');
-    this.classList.add('current-tab');
+function postData(sent) {
+  const data = {
+    "sent":sent
   }
+  console.log(sent);
+  xhr.open("POST", "http://localhost:8000/post", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify(data));
+}
 
-  for (var index = 0; index < tabs.length; index++) {
-    tabs[index].tabindex = index;
-    tabs[index].addEventListener('click', myFunction, false);
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status == 200) {
+    alert(xhr.responseText);
   }
-};
+}
+
+
+// //タブの切り替え
+// window.onload = function () {
+//   var tabs = document.getElementById('tab-container').children;
+//   var tabcontents = document.getElementById('tab-content').children;
+
+//   var myFunction = function () {
+//     var tabchange = this.tabindex;
+//     for (var int = 0; int < tabcontents.length; int++) {
+//       tabcontents[int].className = ' tabcontent';
+//       tabs[int].className = ' tab';
+//     }
+//     tabcontents[tabchange].classList.add('tab-active');
+//     this.classList.add('current-tab');
+//   }
+
+//   for (var index = 0; index < tabs.length; index++) {
+//     tabs[index].tabindex = index;
+//     tabs[index].addEventListener('click', myFunction, false);
+//   }
+// };
 
 
 $(document).ready(function () {
