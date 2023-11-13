@@ -31,7 +31,7 @@ recognition.onresult = (event) => {
     document.getElementById("REC").src=img[cnt].src;
     event.results[0][0].transcript += ".";
     // alert(event.results[0][0].transcript);
-    document.getElementById("EnglishTab").value += "Me: " + event.results[0][0].transcript+"\n";
+    inText = event.results[0][0].transcript;
   }
 }
 
@@ -52,7 +52,8 @@ function changeIMG(){
 
 // データの送信
 function postData() {
-  var str = document.getElementById("EnglishTab").value.replace(/\n/g, "<br>");
+  document.getElementById("EnglishTab").value += "Me: " + inText+"\n";
+  var str = encodeURIComponent(document.getElementById("EnglishTab").value.replace(/\n/g, "<br>"));
   console.log(URL+"/?text="+str+"&num="+num);
   xhr.open("GET", URL+"/?text="+str+"&num="+num, true);
   xhr.send();
