@@ -29,9 +29,9 @@ recognition.onresult = (event) => {
   if (event.results[0].isFinal) {
     cnt = 0;
     document.getElementById("REC").src=img[cnt].src;
-    inText = event.results[0][0].transcript;
+    event.results[0][0].transcript += ".";
     // alert(event.results[0][0].transcript);
-    document.getElementById("EnglishTab").value += "Me: " + event.results[0][0].transcript;
+    document.getElementById("EnglishTab").value += "Me: " + event.results[0][0].transcript+"\n";
   }
 }
 
@@ -52,16 +52,14 @@ function changeIMG(){
 
 // データの送信
 function postData() {
-  const data = {
-    "sent":inText
-  }
-  console.log(URL+"/get?text="+encodeURIComponent(inText)+"&num="+num);
-  xhr.open("POST", URL+"/get?text="+encodeURIComponent(inText)+"&num="+num, true);
+  console.log(URL+"/?text="+encodeURIComponent(document.getElementById("EnglishTab").value)+"&num="+num);
+  xhr.open("GET", URL+"/?text="+encodeURIComponent(inText)+"&num="+num, true);
    xhr.send();
   xhr.onload = function(e) {
     if (xhr.readyState == 4) {
       if (xhr.status == 200 ) {
         console.log(xhr.response)
+        document.getElementById("EnglishTab").value += "Blueberry: " + xhr.response+"\n";
         num++;
         console.log(num);
       }
