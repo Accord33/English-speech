@@ -52,9 +52,10 @@ function changeIMG(){
 
 // データの送信
 function postData() {
-  console.log(URL+"/?text="+encodeURIComponent(document.getElementById("EnglishTab").value)+"&num="+num);
-  xhr.open("GET", URL+"/?text="+encodeURIComponent(inText)+"&num="+num, true);
-   xhr.send();
+  var str = document.getElementById("EnglishTab").value.replace(/\n/g, "<br>");
+  console.log(URL+"/?text="+str+"&num="+num);
+  xhr.open("GET", URL+"/?text="+str+"&num="+num, true);
+  xhr.send();
   xhr.onload = function(e) {
     if (xhr.readyState == 4) {
       if (xhr.status == 200 ) {
