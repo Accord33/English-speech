@@ -28,17 +28,18 @@
 			<div id="canva" class="live2d"></div>
 
 			<form method="post">
-				<textarea class="sendMessage"></textarea><br>
+				<textarea class="sendMessage" id="sendMessage"></textarea><br>
 			</form>
 
 			<!--アイコンの切り替え-->
 			<img id="REC" class="recIcon" onclick="changeIMG()" src="imageFile/REC/0.png">
+			<button onclick="postData()">送信</button>
 			<button>会話終了してスコアを出す</button>
 		</section>
 
 		<section class="side">
 			<!--設定セクション-->
-			<details>
+			<!-- <details>
 				<summary class="level"><strong>▼Level Settings（Click）</strong></summary>
 			<div class="levelText">
 				<p>会話話のレベル設定ができます．初期値は＜中学生レベル＞になります．</p>
@@ -87,10 +88,9 @@
 						１級
 					</label>
 				</fieldset>
-				<!--Js側で2秒後にポップアップ通知が出るように制御-->
 				<button onclick="clickEvent()" class="sendLevel">Blueberryに送信</button>
 			</div>
-            </details>
+            </details> -->
 
 
 
@@ -99,22 +99,22 @@
 			<!-- スクリプトに影響があるようであればJapaneseを削除-->
 			<!-- スクリプトの表示 -->
 			<div class="container">
-				<div id="tab-container">
+				<!-- <div id="tab-container">
 					<div class="tab current-tab">English</div>
 					<div class="tab">Japanese</div>
 					<div class="tab">Score</div>
-				</div>
+				</div> -->
 
 				<div id="tab-content">
 					<div class="tabcontent tab-active">
+						<textarea class="speechScript" value="d" id="EnglishTab"></textarea>
+					</div>
+					<!-- <div class="tabcontent">
 						<textarea class="speechScript" value="d"></textarea>
 					</div>
-					<div class="tabcontent tab-active">
+					<div class="tabcontent">
 						<textarea class="speechScript" value="d"></textarea>
-					</div>
-					<div class="tabcontent tab-active">
-						<textarea class="speechScript" value="d"></textarea>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
@@ -132,8 +132,8 @@
 		};
 		window.addEventListener('DOMContentLoaded', onResize);
 		window.addEventListener('resize', onResize);
-			</script>
-
+		window.addEventListener('load', onResize)
+	</script>
 </body>
 
 <footer>

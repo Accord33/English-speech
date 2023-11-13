@@ -9,23 +9,40 @@ img[1].src = "imageFile/REC/1.png";
 
 SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
 const recognition = new SpeechRecognition();
+recognition.lang = 'en-US';
+recognition.interimResults = true;
+recognition.continuous = false;
 const xhr = new XMLHttpRequest();
+var inText = "";
+var num = 1;
+var URL = "http://localhost:8000";
 
 var cnt=0;
+
+recognition.onresult = (event) => {
+  // alert(event.results[0][0].transcript);
+  // cnt=0;
+  // document.getElementById("REC").src=img[cnt].src;
+  console.log(event.results[0][0].transcript);
+  console.log(event.results[0].isFinal);
+  document.getElementById("sendMessage").value = event.results[0][0].transcript;
+  if (event.results[0].isFinal) {
+    cnt = 0;
+    document.getElementById("REC").src=img[cnt].src;
+    inText = event.results[0][0].transcript;
+    // alert(event.results[0][0].transcript);
+    document.getElementById("EnglishTab").value += "Me: " + event.results[0][0].transcript;
+  }
+}
+
 function changeIMG(){
   
   //画像番号を進める
-  if (cnt == 1)
-  { cnt=0;}
-  else
+  // if (cnt == 1)
+  // { cnt=0;}
+  if (cnt == 0)
   { cnt++; 
-    recognition.onresult = (event) => {
-      alert(event.results[0][0].transcript);
-      cnt=0;
-      document.getElementById("REC").src=img[cnt].src;
-      postData(event.results[0][0].transcript);
-    }
-  
+    // 録音スタート
     recognition.start();
   }
   
@@ -33,21 +50,33 @@ function changeIMG(){
   document.getElementById("REC").src=img[cnt].src;
 }
 
-function postData(sent) {
+// データの送信
+function postData() {
   const data = {
-    "sent":sent
+    "sent":inText
   }
-  console.log(sent);
-  xhr.open("POST", "http://localhost:8000/post", true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(data));
+  console.log(URL+"/get?text="+encodeURIComponent(inText)+"&num="+num);
+  xhr.open("POST", URL+"/get?text="+encodeURIComponent(inText)+"&num="+num, true);
+   xhr.send();
+  xhr.onload = function(e) {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200 ) {
+        console.log(xhr.response)
+        num++;
+        console.log(num);
+      }
+      else {
+        console.error(xhr.statusText);
+      }
+    }
+  }
 }
 
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status == 200) {
-    alert(xhr.responseText);
-  }
-}
+// xhr.onreadystatechange = function() {
+//   if (xhr.readyState === XMLHttpRequest.DONE && xhr.status == 200) {
+//     alert(xhr.responseText);
+//   }
+// }
 
 
 // //タブの切り替え

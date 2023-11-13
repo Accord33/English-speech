@@ -1,5 +1,5 @@
 import flask
-from flask import Flask, request, Response
+from flask import Flask, request, Response, render_template
 from flask_cors import CORS, cross_origin
 import json
 
@@ -10,17 +10,14 @@ CORS(app)
 def main():
     return "Hello"
 
-@app.route("/post", methods=["GET", "POST"])
-@cross_origin(origins=["http://localhost:5500"], methods=["GET", "POST"]) 
-def post():
-    print("a")
-    if request.method == "POST":
-        print("d")
-        print(request.json["sent"])
-        return Response(response=json.dumps({"data":request.json["sent"]}), content_type="application/json")
-    else:
-        print("s")
-        return "No"
+@app.route("/get", methods=["GET", "POST"])
+@cross_origin(origins=["http://localhost:9090"], methods=["GET", "POST"]) 
+def get():
+    text = request.args.get("text")
+    num = request.args.get("num")
+    print(text, num)
+    return "Successfull"
+        
 
 if __name__ == "__main__":
-    app.run(port=8000, host="0.0.0.0")
+    app.run(port=8000, host="0.0.0.0", debug=True)
