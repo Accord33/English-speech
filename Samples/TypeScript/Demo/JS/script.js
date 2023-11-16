@@ -15,7 +15,7 @@ recognition.continuous = false;
 const xhr = new XMLHttpRequest();
 var inText = "";
 var num = 1;
-var URL = "http://localhost:8000";
+var URL = "https://ict-lab.toyo-ushiku.jp/api";
 
 var cnt=0;
 
