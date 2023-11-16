@@ -4,5 +4,5 @@ COPY ./ /app
 WORKDIR /app/Samples/TypeScript/Demo
 RUN npm install
 RUN npm run build
-CMD ["npm", "start"]
+CMD ["npm", "run", "serve"]
 EXPOSE 9090
