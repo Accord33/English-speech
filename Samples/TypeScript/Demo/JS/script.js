@@ -9,6 +9,7 @@ img[1].src = "imageFile/REC/1.png";
 
 SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
 const recognition = new SpeechRecognition();
+recognition.continuous = true;
 recognition.lang = 'en-US';
 recognition.interimResults = true;
 recognition.continuous = false;
@@ -51,6 +52,10 @@ function changeIMG(){
     // 録音スタート
     recognition.start();
   }
+  else if (cnt == 1) {
+    cnt = 0;
+    recognition.stop();
+}
   
   //画像を切り替える
   document.getElementById("REC").src=img[cnt].src;
