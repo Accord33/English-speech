@@ -33,14 +33,11 @@ recognition.onresult = (event) => {
   console.log(event.results[0][0].transcript);
   console.log(event.results[0].isFinal);
   document.getElementById("sendMessage").value = (inText + event.results[0][0].transcript);
-  if (event.results[0].isFinal) {
-    cnt = 0;
-    document.getElementById("REC").src=img[cnt].src;
-    document.getElementById("sendMessage").value += ".";
-    // inText += document.getElementById("sendMessage").value;
-    // alert(event.results[0][0].transcript);
-    // recognition.start();;
-  }
+  // if (event.results[0].isFinal) {
+  //   cnt = 0;
+  //   document.getElementById("REC").src=img[cnt].src;
+  //   document.getElementById("sendMessage").value += ".";
+  // }
 }
 
 function changeIMG(){
@@ -56,6 +53,7 @@ function changeIMG(){
   else if (cnt == 1) {
     cnt = 0;
     recognition.stop();
+    document.getElementById("REC").src=img[cnt].src;
 }
   
   //画像を切り替える
