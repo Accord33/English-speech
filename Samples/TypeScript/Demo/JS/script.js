@@ -12,6 +12,11 @@ const recognition = new SpeechRecognition();
 recognition.lang = 'en-US';
 recognition.interimResults = true;
 recognition.continuous = false;
+const uttr = new SpeechSynthesisUtterance()
+uttr.lang = "en-US"
+uttr.rate = 0.5
+uttr.pitch = 0.5
+uttr.volume = 0.75
 const xhr = new XMLHttpRequest();
 var inText = "";
 var num = 1;
@@ -64,6 +69,8 @@ function postData() {
       if (xhr.status == 200 ) {
         console.log(xhr.response)
         document.getElementById("EnglishTab").value += "Blueberry: " + xhr.response+"\n";
+        uttr.text = xhr.response;
+        speechSynthesis.speak(uttr)
         document.getElementById("sendMessage").value = "";
         num++;
       }
