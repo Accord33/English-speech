@@ -17,6 +17,8 @@ var inText = "";
 var num = 1;
 var URL = "https://ict-lab.toyo-ushiku.jp/api";
 
+var LevelEnglish = 4;
+
 var cnt=0;
 
 recognition.onresult = (event) => {
@@ -53,20 +55,22 @@ function changeIMG(){
 function postData() {
   document.getElementById("EnglishTab").value += "Me: " + document.getElementById("sendMessage").value +"\n";
   var str = encodeURIComponent(document.getElementById("EnglishTab").value.replace(/\n/g, "<br>"));
-  console.log(URL+"/?text="+str+"&num="+num);
-  xhr.open("GET", URL+"/?text="+str+"&num="+num, true);
+  console.log(URL+"/?text="+str+"&num="+num+"&level="+LevelEnglish);
+  xhr.open("GET", URL+"/?text="+str+"&num="+num+"&level="+LevelEnglish, true);
   xhr.send();
+  $("#overlay").fadeIn(300);
   xhr.onload = function(e) {
     if (xhr.readyState == 4) {
       if (xhr.status == 200 ) {
         console.log(xhr.response)
         document.getElementById("EnglishTab").value += "Blueberry: " + xhr.response+"\n";
+        document.getElementById("sendMessage").value = "";
         num++;
-        console.log(num);
       }
       else {
         console.error(xhr.statusText);
       }
+      $("#overlay").fadeOut(300);
     }
   }
 }
@@ -196,8 +200,40 @@ $(document).ready(function () {
 
 //Level送信
 function clickEvent() {
-  setTimeout(() => {
-    alert('Blueberryが情報を受け取りました');
-  }, 2000);
+  if (document.getElementById("gr3").checked) {
+    LevelEnglish = 4;
+  }
+  else if (document.getElementById("grp2").checked) {
+    LevelEnglish = 3;
+  }
+  else if (document.getElementById("gr2").checked) {
+    LevelEnglish = 2;
+  }
+  else if (document.getElementById("grp1").checked) {
+    LevelEnglish = 1;
+  }
+  else if (document.getElementById("gr1").checked) {
+    LevelEnglish = 0;
+  }
+  alert("Level: " + LevelEnglish);
 }
 
+
+// jQuery(function($){
+//   $(document).ajaxSend(function() {
+//     $("#overlay").fadeIn(300);　
+//   });
+    
+//   $('#send').click(function(){
+//     $.ajax({
+//       type: 'GET',
+//       success: function(data){
+//         console.log(data);
+//       }
+//     }).done(function() {
+//       setTimeout(function(){
+//         $("#overlay").fadeOut(300);
+//       },500);
+//     });
+//   }); 
+// });

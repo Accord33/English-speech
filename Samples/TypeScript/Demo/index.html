@@ -34,19 +34,19 @@
 			<!--アイコンの切り替え-->
 			<img id="REC" class="recIcon" onclick="changeIMG()" src="imageFile/REC/0.png">
 			<button onclick="postData()">送信</button>
-			<button>会話終了してスコアを出す</button>
+			<!-- <button>会話終了してスコアを出す</button> -->
 		</section>
 
 		<section class="side">
 			<!--設定セクション-->
-			<!-- <details>
+			<details>
 				<summary class="level"><strong>▼Level Settings（Click）</strong></summary>
 			<div class="levelText">
-				<p>会話話のレベル設定ができます．初期値は＜中学生レベル＞になります．</p>
+				<!-- <p>会話話のレベル設定ができます．初期値は＜中学生レベル＞になります．</p> -->
 
-				<p>◯年齢層で指定する</p>
 
 				<fieldset>
+					<!-- <p>◯年齢層で指定する</p>
 					<input id="jhs" class="radio-inline__input" type="radio" name="accessible-radio" value="jhs"
 						checked="checked" />
 					<label class="radio-inline__label" for="jhs">
@@ -63,11 +63,11 @@
 					<input id="nat" class="radio-inline__input" type="radio" name="accessible-radio" value="nat" />
 					<label class="radio-inline__label" for="nat">
 						ネイティブ
-					</label>
+					</label> -->
 					<div class="test">
-						<p>◯英検のレベルで指定する</p>
+						<p>英検のレベルで指定する</p>
 					</div>
-					<input id="gr3" class="radio-inline__input" type="radio" name="accessible-radio" value="gr3" />
+					<input id="gr3" class="radio-inline__input" type="radio" name="accessible-radio" value="gr3" checked/>
 					<label class="radio-inline__label" for="gr3">
 						３級
 					</label>
@@ -88,9 +88,9 @@
 						１級
 					</label>
 				</fieldset>
-				<button onclick="clickEvent()" class="sendLevel">Blueberryに送信</button>
+				<button onclick="clickEvent()" class="sendLevel">適用</button>
 			</div>
-            </details> -->
+            </details>
 
 
 
@@ -137,6 +137,12 @@
 </body>
 
 <footer>
+	<button id="button" type="button">Click</button>
+	<div id="overlay">
+		<div class="cv-spinner">
+		  <span class="spinner"></span>
+		</div>
+	</div>
 	<img src="imageFile/icon.png" class="icon_footer">
 </footer>
 
