@@ -12,7 +12,6 @@ const recognition = new SpeechRecognition();
 recognition.continuous = true;
 recognition.lang = 'en-US';
 recognition.interimResults = true;
-recognition.continuous = false;
 const uttr = new SpeechSynthesisUtterance()
 uttr.lang = "en-US"
 uttr.rate = 0.5
@@ -33,12 +32,14 @@ recognition.onresult = (event) => {
   // document.getElementById("REC").src=img[cnt].src;
   console.log(event.results[0][0].transcript);
   console.log(event.results[0].isFinal);
-  document.getElementById("sendMessage").value = event.results[0][0].transcript;
+  document.getElementById("sendMessage").value = (inText + event.results[0][0].transcript);
   if (event.results[0].isFinal) {
     cnt = 0;
     document.getElementById("REC").src=img[cnt].src;
-    event.results[0][0].transcript += ".";
+    document.getElementById("sendMessage").value += ".";
+    // inText += document.getElementById("sendMessage").value;
     // alert(event.results[0][0].transcript);
+    // recognition.start();;
   }
 }
 
