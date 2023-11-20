@@ -15,7 +15,7 @@ recognition.interimResults = true;
 const uttr = new SpeechSynthesisUtterance()
 uttr.lang = "en-US"
 uttr.rate = 0.5
-uttr.pitch = 0.5
+uttr.pitch = 2
 uttr.volume = 0.75
 const xhr = new XMLHttpRequest();
 var inText = "";
@@ -30,12 +30,17 @@ recognition.onresult = (event) => {
   // alert(event.results[0][0].transcript);
   // cnt=0;
   // document.getElementById("REC").src=img[cnt].src;
-  console.log(event.results[0][0].transcript);
-  console.log(event.results[0].isFinal);
+  // console.log(event.results[0][0].transcript);
+  // console.log(event.results[0].isFinal);
   // document.getElementById("sendMessage").value = (inText + event.results[0][0].transcript);
   document.getElementById("sendMessage").value = "";
   for (let i = event.resultIndex; i < event.results.length; i++) {
-    document.getElementById("sendMessage").value += (event.results[i][0].transcript+".");
+    if (event.results[i][0].isFinal) {
+      inText += event.results[i][0].transcript;
+    }
+    else {
+      document.getElementById("sendMessage").value += event.results[i][0].transcript;
+    }
   }
   // if (event.results[0].isFinal) {
   //   cnt = 0;
