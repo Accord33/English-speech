@@ -34,7 +34,10 @@ recognition.onresult = (event) => {
   console.log(event.results[0].isFinal);
   // document.getElementById("sendMessage").value = (inText + event.results[0][0].transcript);
   for (let i = event.resultIndex; i < event.results.length; i++) {
-    document.getElementById("sendMessage").value += (event.results[i][0].transcript+".");
+    if (event.results[i][0].isFinal) {}
+    else {
+      document.getElementById("sendMessage").value += (event.results[i][0].transcript+".");
+    }
   }
   // if (event.results[0].isFinal) {
   //   cnt = 0;
