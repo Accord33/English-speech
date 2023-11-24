@@ -254,3 +254,5 @@ fieldset {
 .is-hide{
   display:none;
 }
+
+#tab-active { visibility: hidden; } 

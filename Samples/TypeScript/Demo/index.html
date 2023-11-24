@@ -104,9 +104,11 @@
 					<div class="tab">Japanese</div>
 					<div class="tab">Score</div>
 				</div> -->
+				<div id="on" onclick="document.getElementById('tab-active').style.visibility='visible';">会話ログの表示</div>
+				<duv id="off" onclick="document.getElementById('tab-active').style.visibility='hidden';">会話ログの非表示</duv>
 
 				<div id="tab-content">
-					<div class="tabcontent tab-active">
+					<div class="tabcontent tab-active" id="tab-active">
 						<textarea class="speechScript" value="d" id="EnglishTab"></textarea>
 					</div>
 					<!-- <div class="tabcontent">
