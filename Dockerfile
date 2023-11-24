@@ -1,6 +1,6 @@
 FROM node:latest
 RUN mkdir /app
-COPY ./webapp/ /app
+COPY ./wWebapp/ /app
 WORKDIR /app/Samples/TypeScript/Demo
 RUN npm install
 RUN npm run build
