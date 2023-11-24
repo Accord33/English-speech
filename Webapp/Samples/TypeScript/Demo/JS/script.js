@@ -20,7 +20,7 @@ uttr.volume = 0.75
 const xhr = new XMLHttpRequest();
 var inText = "";
 var num = 1;
-var URL = "https://ict-lab.toyo-ushiku.jp/api";
+var URL = "https://reverseproxy.onrender.com/api";
 
 var LevelEnglish = 4;
 
