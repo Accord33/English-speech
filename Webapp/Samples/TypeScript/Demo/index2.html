@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Pollyfill script -->
+    <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+    <!-- Live2DCubismCore script -->
+    <script src = "../../../Core/live2dcubismcore.js"></script>
+    <!-- Build script -->
+    <script src = "./dist/bundle.js"></script>
+    <style>
+    body {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
+        margin: 0px;
+    }
+    html,body{
+        overflow: hidden
+    }
+    .inputter {
+        position: absolute;
+        top: 80%;
+        z-index: 50;
+    }
+    .input {
+        font-size: 20px;
+        color: grey;
+    }
+    .upload {
+        padding-top: 20px;
+        color: white;
+        text-align: center;
+    }
+    </style>
+    <script>
+        function disableScroll(event) {
+        event.preventDefault();
+        }
+
+        // イベントと関数を紐付け
+        document.addEventListener('touchmove', disableScroll, { passive: false });
+    </script>
+</head>
+<body>
+    <div id="canva"></div>
+    <textarea id="text">再生する内容</textarea>
+    <div class="inputter"><div class="input" id="input">KKKKK</div><br><div class="upload">送信</div></div>
+    <script>
+        const text = document.querySelector('#text')
+
+        if ('speechSynthesis' in window) {
+            alert("このブラウザは音声合成に対応しています。🎉")
+        } else {
+            alert("このブラウザは音声合成に対応していません。😭")
+        }
+          // 発言を作成
+        var uttr = new SpeechSynthesisUtterance("このブラウザは音声合成に対応しています。")
+        // 発言を再生 (発言キューに発言を追加)
+        speechSynthesis.speak(uttr)
+
+        SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+
+        recognition.interimResults = true; 
+        recognition.continuous = false;
+      
+        recognition.onresult = (event) => {
+          document.getElementById('input').textContent  = event.results[0][0].transcript;
+          if (event.results[0].isFinal) {
+            alert(event.results[0][0].transcript);
+            // 発言を作成
+            var uttr = new SpeechSynthesisUtterance(text.value)
+            // 発言を再生 (発言キューに発言を追加)
+            speechSynthesis.speak(uttr)
+            recognition.start();
+          }
+        }
+      
+        recognition.start();
+      </script>
+</body>
+</html>
