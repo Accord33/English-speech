@@ -34,14 +34,17 @@ recognition.onresult = (event) => {
   // console.log(event.results[0].isFinal);
   // document.getElementById("sendMessage").value = (inText + event.results[0][0].transcript);
   // document.getElementById("sendMessage").value = "";
+  document.getElementById("sendMessage").value = "";
+  inText = "";
   for (let i = event.resultIndex; i < event.results.length; i++) {
     if (event.results[i][0].isFinal) {
       inText += event.results[i][0].transcript;
     }
-    else {
-      document.getElementById("sendMessage").value += event.results[i][0].transcript;
-    }
+    // else {
+    //   document.getElementById("sendMessage").value += event.results[i][0].transcript;
+    // }
   }
+  document.getElementById("sendMessage").value = inText;
   // if (event.results[0].isFinal) {
   //   cnt = 0;
   //   document.getElementById("REC").src=img[cnt].src;
